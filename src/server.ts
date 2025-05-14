@@ -6,7 +6,6 @@ const app = express();
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
-  console.log("Request details: ", req)
   res.send('Hello from TypeScript + Express!');
 });
 
