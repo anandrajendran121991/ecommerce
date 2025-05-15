@@ -1,4 +1,4 @@
-// --- Entity: Product ---
+// src/entities/Product.ts
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,9 +6,13 @@ import {
   ManyToOne,
   OneToOne,
   JoinColumn,
-} from "typeorm";
-import { Category } from "./Category";
-import { Inventory } from "./Inventory";
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Category } from './Category';
+import { Inventory } from './Inventory';
+import { OrderItem } from './OrderItem';
 
 @Entity()
 export class Product {
@@ -18,15 +22,27 @@ export class Product {
   @Column()
   name!: string;
 
-  @Column("text")
+  @Column('text')
   description!: string;
 
-  @Column("decimal")
+  @Column('decimal', { precision: 10, scale: 2 })
   price!: number;
+
+  @Column()
+  status!: string;
 
   @ManyToOne(() => Category, (category) => category.products)
   category!: Category;
 
   @OneToOne(() => Inventory, (inventory) => inventory.product)
   inventory!: Inventory;
+
+  @OneToMany(() => OrderItem, (item) => item.product)
+  orderItems!: OrderItem[];
+
+  @CreateDateColumn()
+  createdAt!: Date;
+
+  @UpdateDateColumn()
+  updatedAt!: Date;
 }
