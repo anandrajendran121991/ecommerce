@@ -1,7 +1,3 @@
-Here’s a polished and more readable version of your `README.md`:
-
----
-
 # 🛒 Full-Stack Product & Payment App
 
 A full-stack, Dockerized application featuring three services that together support product browsing, checkout, and secure Stripe-based payments.
