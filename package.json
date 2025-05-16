@@ -29,9 +29,11 @@
     "typeorm": "^0.3.24",
     "typescript": "^5.8.3"
   },
-  "type": "commonjs" ,
+  "type": "commonjs",
   "dependencies": {
+    "express-async-handler": "^1.2.0",
     "mysql2": "^3.14.1",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "stripe": "^12.18.0"
   }
 }

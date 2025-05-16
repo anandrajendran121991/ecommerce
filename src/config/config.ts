@@ -10,6 +10,8 @@ interface Config {
   dbPassword: string;
   dbName: string;
   dbPort: number;
+  stripeSecretKey: string;
+  stripeWebhookSecret: string;
 }
 
 const config: Config = {
@@ -20,6 +22,8 @@ const config: Config = {
   dbPassword: process.env.DB_PASSWORD || 'secret',
   dbName: process.env.DB_NAME || 'payment_db',
   dbPort: Number(process.env.DB_PORT) || 3306,
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY || 'secret-key',
+  stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET || 'webhook-key',
 };
 
 export default config;

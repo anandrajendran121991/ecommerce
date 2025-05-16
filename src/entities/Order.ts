@@ -9,7 +9,6 @@ import {
 } from 'typeorm';
 import { User } from './User';
 import { Address } from './Address';
-import { Product } from './Product';
 import { OrderItem } from './OrderItem';
 
 @Entity()
@@ -19,6 +18,12 @@ export class Order {
 
   @Column()
   status!: string;
+
+  @Column()
+  paymentIntentId!: string;
+
+  @Column('decimal', { precision: 10, scale: 2 })
+  total!: number;
 
   @ManyToOne(() => User, (user) => user.orders)
   user!: User;
