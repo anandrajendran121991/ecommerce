@@ -12,7 +12,7 @@ import config from './config/config';
 export const AppDataSource = new DataSource({
   type: 'mysql',
   host: config.dbHost,
-  port: config.port,
+  port: config.dbPort,
   username: config.dbUser,
   password: config.dbPassword,
   database: config.dbName,
