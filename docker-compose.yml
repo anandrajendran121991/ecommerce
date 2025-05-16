@@ -18,6 +18,19 @@ services:
     depends_on:
       - mysql
 
+  ui-service:
+    build:
+      context: ./ui-service
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./ui-service:/app
+      - /app/node_modules
+    command: npm run dev
+    environment:
+      - NODE_ENV=development
+
   mysql:
     image: mysql:8.0
     restart: always
