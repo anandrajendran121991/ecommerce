@@ -3,36 +3,25 @@ import stripe from '../config/stripe';
 
 export const createCheckoutSession = async (req: Request, res: Response) => {
   try {
-    // 🔧 Hardcoded product list
-    const lineItems = [
-      {
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: 'Test T-Shirt',
-          },
-          unit_amount: 2000, // $20.00
+    const products = req.body.products;
+
+    const lineItems = products.map((product: any) => ({
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: product.name,
         },
-        quantity: 1,
+        unit_amount: Math.round(product.price * 100), // dollars to cents
       },
-      {
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: 'Test Hoodie',
-          },
-          unit_amount: 4500, // $45.00
-        },
-        quantity: 2,
-      },
-    ];
+      quantity: product.quantity,
+    }));
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
       customer_email: 'anand.rajendran121991@gmail.com', // ✅ Add this
       line_items: lineItems,
-      success_url: 'http://localhost:3000/checkout/success',
+      success_url: 'http://localhost:5173/products',
       cancel_url: 'http://localhost:3000/checkout/cancel',
     });
 

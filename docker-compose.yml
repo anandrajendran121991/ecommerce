@@ -21,7 +21,7 @@ services:
   ui-service:
     build:
       context: ./ui-service
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "5173:5173"
     volumes:

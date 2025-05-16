@@ -31,6 +31,9 @@ export class Product {
   @Column()
   status!: string;
 
+  @Column()
+  imageUrl!: string;
+
   @ManyToOne(() => Category, (category) => category.products)
   category!: Category;
 

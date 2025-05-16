@@ -2,8 +2,11 @@ import express from 'express';
 import productRoutes from './routes/products';
 import checkoutRoutes from './routes/checkout';
 import webhookRoutes from './routes/webhook';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
 
 // We need this before the json setup
 app.use('/webhook', webhookRoutes); // raw body used here

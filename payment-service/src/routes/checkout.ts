@@ -3,7 +3,7 @@ import { createCheckoutSession } from '../controllers/checkout';
 
 const router: Router = Router();
 // GET /create-checkout-session
-router.get('/create-checkout-session', createCheckoutSession);
+router.post('/', createCheckoutSession);
 
 // 👇 Success handler
 router.get('/success', (req: Request, res: Response) => {

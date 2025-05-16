@@ -11,7 +11,18 @@ export const getAllProducts = async (
     const products = await productRepo.find({
       relations: ['category', 'inventory'],
     });
-    res.status(200).json(products);
+
+    const flatProducts = products.map((p) => ({
+      id: p.id,
+      name: p.name,
+      description: p.description,
+      price: Number(p.price),
+      image: p.imageUrl, // flatten imageUrl to image
+      category: p.category.name,
+      availableQuantity: p.inventory.quantity,
+      status: p.status,
+    }));
+    res.status(200).json(flatProducts);
   } catch (error) {
     console.error('Error fetching products:', error);
     res.status(500).json({ error: 'Failed to fetch products' });
