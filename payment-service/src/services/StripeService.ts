@@ -1,10 +1,8 @@
 import Stripe from 'stripe';
-import { AppDataSource } from '../data-source';
 import config from '../config/config';
-import { Order } from '../entities/Order';
-import { User } from '../entities/User';
 import { CartItem, PaymentProcessor } from '../interfaces/payment';
 import { Request } from 'express';
+import { publishPaymentSuccess } from '../kafka/publishers/PaymentPublisher';
 
 // ✅ Initialize Stripe instance
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
@@ -73,22 +71,15 @@ export class StripeService implements PaymentProcessor {
   private async handleCheckoutSessionCompleted(
     session: Stripe.Checkout.Session,
   ): Promise<void> {
-    const email = session.customer_email;
-    if (!email) return;
-
-    const userRepo = AppDataSource.getRepository(User);
-    const orderRepo = AppDataSource.getRepository(Order);
-    const user = await userRepo.findOneBy({ email });
-
-    if (!user) return;
-
-    const order = orderRepo.create({
-      user,
-      total: (session.amount_total ?? 0) / 100,
+    const orderData = {
+      sessionId: session.id,
+      customerEmail: session.customer_email,
+      amountTotal: (session.amount_total ?? 0) / 100,
+      paymentStatus: 'PAID',
       paymentIntentId: session.payment_intent?.toString() ?? '',
-      status: 'PAID',
-    });
+      createdAt: new Date().toISOString(),
+    };
 
-    await orderRepo.save(order);
+    await publishPaymentSuccess(orderData);
   }
 }

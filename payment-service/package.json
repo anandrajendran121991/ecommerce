@@ -32,7 +32,9 @@
   },
   "type": "commonjs",
   "dependencies": {
+    "cors": "^2.8.5",
     "express-async-handler": "^1.2.0",
+    "kafkajs": "^2.2.4",
     "mysql2": "^3.14.1",
     "reflect-metadata": "^0.2.2",
     "stripe": "^12.18.0"
