@@ -107,8 +107,16 @@ CREATE TABLE orders (
 Configure these in a `.env` file or your Docker Compose environment:
 
 ```env
-STRIPE_SECRET_KEY=sk_test_...
-STRIPE_WEBHOOK_SECRET=whsec_...
+PORT=3000
+NODE_ENV=development
+DB_HOST=localhost
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+DB_PORT=3360
+PAYMENT_PROVIDER=stripe
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
 ```
 
 ---
