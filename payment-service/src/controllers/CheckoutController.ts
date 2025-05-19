@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { StripeService } from '../services/StripeService';
 import { AppDataSource } from '../data-source';
 import { Product } from '../entities/Product';
 import { In } from 'typeorm';
