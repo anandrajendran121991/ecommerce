@@ -12,6 +12,7 @@ interface Config {
   dbPort: number;
   stripeSecretKey: string;
   stripeWebhookSecret: string;
+  paymentProvider: string;
 }
 
 const config: Config = {
@@ -22,6 +23,7 @@ const config: Config = {
   dbPassword: process.env.DB_PASSWORD || 'secret',
   dbName: process.env.DB_NAME || 'payment_db',
   dbPort: Number(process.env.DB_PORT) || 3306,
+  paymentProvider: process.env.PAYMENT_PROVIDER || 'stripe',
   stripeSecretKey: process.env.STRIPE_SECRET_KEY || 'secret-key',
   stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET || 'webhook-key',
 };

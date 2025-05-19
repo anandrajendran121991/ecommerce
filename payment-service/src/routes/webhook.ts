@@ -1,5 +1,5 @@
 import express from 'express';
-import { handleStripeWebhook } from '../controllers/webhook';
+import { webhookController } from '../container';
 
 const router = express.Router();
 
@@ -7,7 +7,7 @@ const router = express.Router();
 router.post(
   '/',
   express.raw({ type: 'application/json' }),
-  handleStripeWebhook,
+  webhookController.handleWebhook,
 );
 
 export default router;

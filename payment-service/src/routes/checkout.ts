@@ -1,9 +1,10 @@
 import { Router, Request, Response } from 'express';
-import { createCheckoutSession } from '../controllers/checkout';
+import { checkoutController } from '../container';
 
 const router: Router = Router();
-// GET /create-checkout-session
-router.post('/', createCheckoutSession);
+
+// POST /create-checkout-session
+router.post('/', checkoutController.createSession);
 
 // 👇 Success handler
 router.get('/success', (req: Request, res: Response) => {

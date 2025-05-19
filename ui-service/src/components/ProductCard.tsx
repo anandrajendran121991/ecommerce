@@ -38,7 +38,9 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
       />
       <CardContent>
         <Typography variant="h6">{product.name}</Typography>
-        <Typography variant="body2">{product.description}</Typography>
+        <Typography variant="body2">
+          {product.description.substring(0, 45)}
+        </Typography>
         <Typography variant="subtitle1">${product.price.toFixed(2)}</Typography>
       </CardContent>
       <CardActions>
