@@ -2,7 +2,7 @@
 
 A full-stack, Dockerized application featuring multiple services that support product browsing, checkout, and secure Stripe-based payments—integrated with Kafka for event-driven order processing.
 
----
+![Architecture Diagram](./payment-service/src/assets/overview.png)
 
 ## 🔧 Services Overview
 
